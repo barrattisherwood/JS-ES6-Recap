@@ -17,7 +17,8 @@ console.log('scoreText: ', scoreText);
 // Challenge Area
 // total, tipPercentage
 let getTip = function(total, tipPercentage = 0.1) {
+    console.log(`A ${tipPercentage * 100}% tip on $${total} would be $${total * tipPercentage}`);
     return total * tipPercentage;
 }
 
-console.log('tip: ', getTip(123, 0.13));
+getTip(60)
