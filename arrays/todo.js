@@ -16,4 +16,7 @@ console.log(todos);
 todos.forEach(function(item, index){
     console.log(`${index + 1}. ${item}`);
 });
-
+console.log(`----------------------`);
+for (let i = 0; i < todos.length; i++) {
+    console.log(`${i + 1}. ${todos[i]}`);
+}
