@@ -6,3 +6,14 @@ todos.shift()
 
 console.log(`Number of todos: ${todos.length}`);
 console.log(todos);
+
+// TODO
+
+// 1. The first item
+// 2. The second item
+// 3. The third item
+
+todos.forEach(function(item, index){
+    console.log(`${index + 1}. ${item}`);
+});
+
