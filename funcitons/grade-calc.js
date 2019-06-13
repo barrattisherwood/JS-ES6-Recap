@@ -2,8 +2,8 @@
 // 15 / 20 -> You got a C (75%)!
 // A 90-100, B 80-89, C 70-79, D 60-69, F 0-59
 
-let getGrade = function(score, total = 100) {
-    let percentage = (score / total) * 100
+const getGrade = function(score, total = 100) {
+    const percentage = (score / total) * 100
     let grade = ''
     console.log('percentage', percentage);
 
