@@ -22,5 +22,15 @@ const findNote = function(notes, noteTitle) {
 //     return notes[index]
 // }
 
-const note = findNote(notes, 'Office modification');
-console.log('note: ', note);
+const findNotes = function(notes, searchTerm) {
+    return notes.filter(function(note) {
+        const isTitleMatch = note.title.toLowerCase().includes(searchTerm.toLowerCase());
+        const isBodyMatch = note.body.toLowerCase().includes(searchTerm.toLowerCase());
+        return isTitleMatch || isBodyMatch;
+    })
+}
+
+console.log(findNotes(notes, 'work'));
+
+// const note = findNote(notes, 'Office modification');
+// console.log('note: ', note);

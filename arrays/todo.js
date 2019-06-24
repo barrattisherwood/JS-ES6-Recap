@@ -1,7 +1,7 @@
 const todos = [
     {
         text: 'walk the dog',
-        completed: false
+        completed: true
     },
     {
         text: 'pack firewood',
@@ -17,19 +17,27 @@ const todos = [
     },
     {
         text: 'rave hard asf',
-        completed: true
+        completed: false
     }]
     
-console.log('todos: ', todos);
+// console.log('todos: ', todos);
 
-let deleteTodo = function (todos, todoTitleToBeDeleted) {
-    const index = todos.findIndex(function(todo) {
-        return todo.text.toLowerCase() === todoTitleToBeDeleted.toLowerCase()
-    });
-    if (index !== -1) {
-        todos.splice(index, 1);
-    }    
+// let deleteTodo = function (todos, todoTitleToBeDeleted) {
+//     const index = todos.findIndex(function(todo) {
+//         return todo.text.toLowerCase() === todoTitleToBeDeleted.toLowerCase()
+//     });
+//     if (index !== -1) {
+//         todos.splice(index, 1);
+//     }    
+// }
+
+const getThingsToDo = function(todos) {
+    return todos.filter(function(todo) {
+        return !todo.completed
+    })
 }
 
-deleteTodo(todos, 'go to sleep');
-console.log('todos', todos);
+console.log(getThingsToDo(todos));
+
+// deleteTodo(todos, 'go to sleep');
+// console.log('todos', todos);
