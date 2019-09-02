@@ -9,6 +9,19 @@ const notes = [{
     body: 'Get a new seat'
 }];
 
+// const user = {
+//     name: 'Andrew',
+//     age: 27
+// }
+// const userJSON = JSON.stringify(user);
+// console.log('userJSON: ', userJSON);
+
+// localStorage.setItem('user', userJSON);
+
+const userJSON = JSON.parse(localStorage.getItem('user'));
+console.log(`${userJSON.name} is ${userJSON.age}`);
+
+
 // DOM - Document Object Model
 
 // Query and remove
