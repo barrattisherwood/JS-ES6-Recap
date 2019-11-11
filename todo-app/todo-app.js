@@ -1,37 +1,30 @@
-const todos = [
-    {
-        text: 'walk the dog',
-        completed: true
-    },
-    {
-        text: 'pack firewood',
-        completed: true
-    },
-    {
-        text: 'drink a beer',
-        completed: false
-    },
-    {
-        text: 'go to sleep',
-        completed: false
-    },
-    {
-        text: 'rave hard asf',
-        completed: false
-    }]
+let todos = getSavedTodos()
 
-// You have 2 todos left in a p element
-// Add a p for each todos above (use text per item)
-const incompleteTodos = todos.filter(function(item) {
-    return !item.completed
+const filters = {
+    searchText: '',
+    hideCompleted: false
+}
+
+renderTodos(todos, filters)
+
+document.querySelector('#search-text').addEventListener('input', (e) => {
+    filters.searchText = e.target.value
+    renderTodos(todos, filters)
 })
 
-const summary = document.createElement('h2');
-summary.textContent = `You have ${incompleteTodos.length} todos left`;
-document.querySelector('body').appendChild(summary);
+document.querySelector('#new-todo').addEventListener('submit', (e) => {
+    e.preventDefault()
+    todos.push({
+        id: uuidv4(),
+        text: e.target.elements.text.value,
+        completed: false
+    })
+    saveTodos(todos)
+    renderTodos(todos, filters)
+    e.target.elements.text.value = ''
+})
 
-todos.forEach(function(item){
-    const newTodoParagraph = document.createElement('p');
-    newTodoParagraph.textContent = item.text;
-    document.querySelector('body').appendChild(newTodoParagraph);
-});
+document.querySelector('#hide-completed').addEventListener('change', (e) => {
+    filters.hideCompleted = e.target.checked
+    renderTodos(todos, filters)
+})
