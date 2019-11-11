@@ -1,43 +1,65 @@
-const notes = [{
-    title: 'My next trip',
-    body: 'I would like to go to Spain'
-}, {
-    title: 'Habbits to work on',
-    body: 'Exercise. Eating a bit better'
-}, {
-    title: 'Office modification',
-    body: 'Get a new seat'
-}];
+let notes = getSavedNotes()
 
-// const user = {
-//     name: 'Andrew',
-//     age: 27
-// }
-// const userJSON = JSON.stringify(user);
-// console.log('userJSON: ', userJSON);
+const filters = {
+    searchText: ''
+}
 
-// localStorage.setItem('user', userJSON);
+renderNotes(notes, filters)
 
-const userJSON = JSON.parse(localStorage.getItem('user'));
-console.log(`${userJSON.name} is ${userJSON.age}`);
+document.querySelector('#create-note').addEventListener('click', function (e) {
+    const id = uuidv4()
 
-
-// DOM - Document Object Model
-
-// Query and remove
-// const p = document.querySelector('p');
-// p.remove();
-
-// Query all and remove
-const ps = document.querySelectorAll('p');
-
-ps.forEach(function(item) {
-    item.textContent = '*****';
-    // console.log(item.textContent);
-    // item.remove();
+    notes.push({
+        id: id,
+        title: '',
+        body: ''
+    })
+    saveNotes(notes)
+    location.assign(`/edit.html#${id}`)
 })
 
-// Add a new element
-const newParagraph = document.createElement('p');
-newParagraph.textContent = 'This is a new element from javascript';
-document.querySelector('body').appendChild(newParagraph);
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    filters.searchText = e.target.value
+    renderNotes(notes, filters)
+})
+
+document.querySelector('#filter-by').addEventListener('change', function (e) {
+    console.log(e.target.value)
+})
+
+window.addEventListener('storage', function (e) {
+    if (e.key === 'notes') {
+        notes = JSON.parse(e.newValue)
+        renderNotes(notes, filters)
+    }
+})
+
+// Unix Epoch - January 1st 1970 00:00:00
+
+const now = new Date();
+const timestamp = now.getTime();
+console.log('timestamp: ', timestamp);
+
+const myDate = new Date(timestamp);
+console.log(myDate.getFullYear());
+
+
+const dateOne = new Date('April 10 2015 01:00:00');
+const dateTwo = new Date('April 10 2015 00:00:00');
+
+const dateOneTimeStamp = dateOne.getTime();
+const dateTwoTimeStamp = dateTwo.getTime();
+
+if (dateOneTimeStamp < dateTwoTimeStamp) {
+    firstDate = new Date(dateOneTimeStamp).toString();
+} else if (dateOneTimeStamp > dateTwoTimeStamp) {
+    firstDate = new Date(dateTwoTimeStamp).toString();
+}
+console.log('firstDate: ', firstDate);
+
+// console.log(`Year: ${now.getFullYear()}`);
+// console.log(`Month: ${now.getMonth()}`);
+// console.log(`Day of month: ${now.getDate()}`);
+// console.log(`Hour: ${now.getHours()}`);
+// console.log(`Minute: ${now.getMinutes()}`);
+// console.log(`Seconds: ${now.getSeconds()}`);
