@@ -3,6 +3,9 @@
 // A 90-100, B 80-89, C 70-79, D 60-69, F 0-59
 
 const getGrade = function(score, total = 100) {
+    if (typeof score !== 'number' || typeof total !== 'number') {
+        throw Error('Argument is not of expected type')
+    }
     const percentage = (score / total) * 100
     let grade = ''
     console.log('percentage', percentage);
@@ -24,8 +27,11 @@ const getGrade = function(score, total = 100) {
         grade = 'F';
         break;
     }
-
     return `${score} / ${total} -> You got a ${grade} (${percentage}%)!`;
 }
 
-console.log(getGrade(16, 20));
+try {
+    console.log(getGrade(16, true));
+} catch (e) {
+    console.log(e.message);
+}
