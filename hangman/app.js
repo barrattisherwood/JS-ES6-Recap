@@ -1,14 +1,18 @@
-// Primitive value: string, number, boolean, null, undefined
+const gameStringOutput = document.getElementById('puzzleString')
+const remainingGuessesOutput = document.getElementById('remainingGuesses')
+const game1 = new HangMan('boomer', 3)
 
-// Object: myObject --> Object.prototype --> null
-// Array: myArray --> Array.prototype --> Object.protptype --> null
-// Function: myFunc --> Function.prototype --> Object.prototype --> null
-// String: myString --> String.prototype --> Object.prototype --> null
-// Number: myNumber --> Number.prototype --> Object.prototype --> null
-// Boolean: myBoolean --> Boolean.prototype --> Object.prototype --> null
+game1.getPuzzle();
 
-const product = 'Computer'
-console.log(product);
+renderOutput = function(guessedLetters, remainingGuesses) {
+    gameStringOutput.innerHTML = `Hangman word: ${guessedLetters}`
+    remainingGuessesOutput.innerHTML = `Number of guesses left: ${remainingGuesses}`
+}
 
-const otherProduct = new String('Phone')
-console.log(otherProduct);
+renderOutput(game1.getPuzzle(), game1.remainingGuesses)
+
+window.addEventListener('keypress', function (e) {
+    const guess = String.fromCharCode(e.charCode);
+    game1.haveAGuess(guess)
+    renderOutput(game1.getPuzzle(), game1.remainingGuesses)
+})

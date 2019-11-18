@@ -1,12 +1,12 @@
 const HangMan = function(word, remainingGuesses) {
     this.word = word.toLowerCase().split('');
     this.remainingGuesses = remainingGuesses;
-    this.guessedLetters = ['c', 'a'];
+    this.guessedLetters = [];
 }
 
 HangMan.prototype.getPuzzle = function() {
     let puzzle = ''
-    
+
     this.word.forEach((letter) => {
         if (this.guessedLetters.includes(letter) || letter === ' ') {
             puzzle += letter
@@ -14,12 +14,19 @@ HangMan.prototype.getPuzzle = function() {
             puzzle += '*'
         }
     })
-
     return puzzle
 }
 
-const game1 = new HangMan('Cat', 3)
-console.log(game1.getPuzzle());
+HangMan.prototype.haveAGuess = function(guessedChar) {
+    guessedChar = guessedChar.toLowerCase()
+    isUnique = !this.guessedLetters.includes(guessedChar)
+    isBadGuess = !this.word.includes(guessedChar)
 
-const game2 = new HangMan('New Jersey', 7)
-console.log(game2.getPuzzle());
+    if (isUnique) {
+        this.guessedLetters.push(guessedChar)
+    }
+
+    if (isUnique && isBadGuess) {
+        this.remainingGuesses--
+    }
+}
